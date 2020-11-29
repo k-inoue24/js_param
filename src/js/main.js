@@ -1,20 +1,28 @@
 $(window).on('load',function(){
+  // 検索結果ページ：URLパラメータを分割し、アーティスト一覧を絞り込み
   if($('body').hasClass('result')) {
-    $('.resultList li').hide();
-    var URL = location.search;
-    var splitUrl1 = URL.split('?');
-    var splitUrl2 = splitUrl1[1].split('&');
-    console.log(splitUrl2);
-    $('.resultList li').each(function(index) {
-      for(var i = 0; i< splitUrl2.length; i++) {
-        if($(this).hasClass(splitUrl2[i])) {
-          $(this).show();
+    if(location.search) {
+      $('.resultList li').hide();
+      var URL = location.search;
+      var splitUrl1 = URL.split('?');
+      var splitUrl2 = splitUrl1[1].split('&');
+      $('.resultList li').each(function(index) {
+        for(var i = 0; i< splitUrl2.length; i++) {
+          if($(this).hasClass(splitUrl2[i])) {
+            $(this).show();
+          }
         }
-      }
-    })
+      })
+    }
   }
 })
 $(function(){
+  // 検索結果ページ：URLパラメータが存在しない場合はhrefをhistory.back()からページリンクに変更
+  $('#toSerachPage').on('click',function(){
+    if(!location.search) $(this).attr('href','index.html');
+  });
+
+  // 検索ページ：チェックボックスの選択内容に基づきURLパラメータを生成→aタグのリンクにパラメータを設定
   var totalUrl = '?';
   var param;
   $('.chkSection input').each(function(){
@@ -24,8 +32,13 @@ $(function(){
     })
   })
   $('#searchBtn').on('click',function(){
-    if(totalUrl != '?') $(this).attr('href', $(this).attr('href') + totalUrl);
-    else return false;
+    if(totalUrl != '?') {
+      $(this).attr('href', $(this).attr('href') + totalUrl);
+    }
+    else {
+      alert('一つ以上チェックしてください');
+      return false;
+    }
   })
   function chkInput(input) {
     param = input.data('target');

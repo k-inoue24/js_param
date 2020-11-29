@@ -4,14 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>検索</title>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="js/main.js"></script>
 </head>
 <body>
 <section>
-  <h1>検索ボタン</h1>
-  <ul>
-    <li><a href="result.html?sex=boys">男性アーティスト</a></li>
-    <li><a href="result.html?sex=girls">女性アーティスト</a></li>
-  </ul>
+  <h1>検索チェックボックス</h1>
+  <div class="chkSection">
+    <input type="checkbox" value="男性" data-target="boys" id="boys">
+    <label for="boys">男性</label>
+    <input type="checkbox" value="女性" data-target="gilrs" id="gilrs">
+    <label for="gilrs">女性</label>
+    <input type="checkbox" value="アイドル" data-target="idle" id="idle">
+    <label for="idle">アイドル</label>
+    <input type="checkbox" value="K-POP" data-target="kpop" id="kpop">
+    <label for="kpop">K-POP</label>
+    <input type="checkbox" value="ロックバンド" data-target="rockband" id="rock">
+    <label for="rock">ロックバンド</label>
+  </div>
+  <a id="searchBtn" href="result.html">検索結果へ</a>
 </section>
 </body>
 </html>
